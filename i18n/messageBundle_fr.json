@@ -1,0 +1,7 @@
+{
+    "Hello {0}, you have {1} in your bank account.": "Bonjour {0}, vous avez {1} dans votre compte bancaire."   , 
+    "Hello, you have in your bank account.": "Bonjour {0}, vous avez {1} dans votre compte bancaire."   ,
+    "heloo" :"HELLO",
+     "Survey{0}":"{0}SURVEY",
+     "file end {0} with  {0} .fragment{1}.html":"wenjian end {0} with  {0} .fragment{1}.html"
+  }

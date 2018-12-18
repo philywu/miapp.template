@@ -1,0 +1,21 @@
+ {
+    "version":"1.0",
+    "pages":[        
+        {
+            "name":"template_main",
+            "controller":"TemplateMainController",
+            "header":{
+                "title": "Template",
+                "isHome":true,
+                "isBack":false
+                
+            },
+            "main":{             
+            },
+            "bottom":{
+
+            }
+        }           
+
+    ]
+}
