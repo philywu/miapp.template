@@ -1,8 +1,6 @@
 import GLOBAL from '../scripts/constants.js';
 import {BaseController} from "./BaseController.js";
 
-
-const NOTIFICATION_SENDER1 = "hitools"
 class TemplateMainController extends BaseController {
     constructor(args) {
         super(args);
@@ -18,7 +16,13 @@ class TemplateMainController extends BaseController {
    
     registerEvent() {
         //bind this
-        //bind this
+        // for route
+        document.querySelector("#b_next").addEventListener("click",evt =>{
+            
+            this.app.route("notif_main");
+            
+        });
+        //for multi-lang useage
         document.querySelector("#v_zh").addEventListener("click",evt =>{
            
             let param = {"i18n":{locale: 'zh-CN', defaultCurrency: 'CNY', messageBundleName: "messageBundle_zh"}};
@@ -29,7 +33,8 @@ class TemplateMainController extends BaseController {
             
             this.app.reRender();
             
-        })
+        });
+        
     }
 
 

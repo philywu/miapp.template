@@ -1,6 +1,6 @@
-import {ControllerFactory} from "../controller/controller.js";
+import CONFIG from "../config/config.js"
 
-var _CONFIG_FILE_PATH = "../config/config.json";
+//var CONFIG = "../config/config.js";
 var _FRAGMENT_FILE_EXT = ".fragment.html";
 var _PRINT_FILE_EXT = ".print.html";
 var _VIEW_FILE_PATH = "../view/";
@@ -19,8 +19,6 @@ class Page {
         this.currentPageConfig = {};
         this.historyPageConfigStack = [];
 
-        this.config = null;
-        
     }
     /**
      * get page configuration by pageName.
@@ -28,29 +26,31 @@ class Page {
      * @param {string} pageName 
      */
     getPageConfig(pageName) {
-        if (this.config){
-            const pages = this.config.pages;
-            let pageConfig = pages.filter(el => {                
-                return (el.name == pageName)
-                });
-        
-            pageConfig[0].controllerInstance = ControllerFactory.getInstance(pageConfig[0].controller);
-            this.currentPageConfig = pageConfig[0] ; 
-            return pageConfig[0];
-        } 
+       
+          
+            let pageConfig = CONFIG.pages[pageName];
+            if (pageConfig){
+                //set controler 
+                pageConfig.controllerInstance = new pageConfig.controller;
+                //set view name as same as key name
+                pageConfig.viewName = pageName ; 
+                this.currentPageConfig = pageConfig ; 
+                return pageConfig;
+            }
+      
     }
     /**
      * get home page name by searching header->isHome field in config file
      */
     getHomePageName() {
-        if (this.config){
-            const pages = this.config.pages;
-            let homePage = pages.filter(el => {                
+       
+            const pages = CONFIG.pages;
+            let homePage = Object.values(pages).find(el => {                
                 return (el.header.isHome)
                 });
                     
-            return homePage[0].name;
-        } 
+            return homePage.name;
+        
     }
     
     /**
@@ -74,10 +74,8 @@ class Page {
      * load page 
      * @param {string} pageName 
      */
-    async load(pageName) {             
-        if (!this.config){
-            this.config = await this.getConfigFromJson();
-        }
+     load(pageName) {             
+       
         if (!pageName) {
            pageName = this.getHomePageName();
         } 
@@ -107,23 +105,7 @@ class Page {
             return null; 
         }
     }
-    /**
-     * get config from Json
-     */
-    async getConfigFromJson() {
-        if (!this.config) {
-            try {
-                let res = await fetch(_CONFIG_FILE_PATH,_FETCH_ARGS);
-                return res.json();
-            } catch(err) {
-                console.log(err);
-                return null; 
-            }
-        } else {
-            return this.config;
-        }
-        
-    }
+
    
 }
 

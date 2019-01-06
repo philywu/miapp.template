@@ -2,15 +2,14 @@ import {
     Page
 } from "./page.js";
 import GLOBAL from "./constants.js";
+
 import {
-    Util
-} from "../util/util.js"; 
-import { I18n } from "./i18n.js";
-{
+    I18n
+} from "./i18n.js"; {
     /*
     app: global vairable of app page
     */
-    var app = {        
+    var app = {
         page: new Page()
     };
     // check service worker
@@ -32,13 +31,16 @@ import { I18n } from "./i18n.js";
      */
     app.init = function (pageName) {
 
-        app.page.load(pageName).then(pageConfig => {
-            if (pageConfig) {
-                app.render(pageConfig);
-               // app.render(pageConfig,{"i18n":{locale: 'fr-CA', defaultCurrency: 'CAD', messageBundleName: "messageBundle_fr"}});
-            }
-        });
-
+        // app.page.load(pageName).then(pageConfig => {
+        //     if (pageConfig) {
+        //         app.render(pageConfig);
+        //        // app.render(pageConfig,{"i18n":{locale: 'fr-CA', defaultCurrency: 'CAD', messageBundleName: "messageBundle_fr"}});
+        //     }
+        // });
+        const pageConfig = app.page.load(pageName);
+        if (pageConfig) {
+            app.render(pageConfig);
+        }
     }
 
     /**
@@ -46,15 +48,12 @@ import { I18n } from "./i18n.js";
      */
 
     app.route = function (pageName, param) {
-        if (app.page.config) {
 
-            app.page.historyPush(app.page.currentPageConfig);
-            let pageConfig = app.page.getPageConfig(pageName);
-            app.render(pageConfig, param);
+        app.page.historyPush(app.page.currentPageConfig);
+        let pageConfig = app.page.getPageConfig(pageName);
+        app.render(pageConfig, param);
 
-        } else {
-            app.init(pageName);
-        }
+
     }
     /**
      * rerender the same page
@@ -62,7 +61,7 @@ import { I18n } from "./i18n.js";
     app.reRender = function (param) {
         //set current page 
         //header
-        app.render(app.page.currentPageConfig,param)
+        app.render(app.page.currentPageConfig, param)
     }
     /**
      * render page by using config
@@ -99,41 +98,42 @@ import { I18n } from "./i18n.js";
      */
     app.renderMain = async function (config, param) {
         let mainDiv = document.getElementsByClassName("main")[0];
-        let html = await this.page.getFragmentFile(config.name);
+        let html = await this.page.getFragmentFile(config.viewName);
         mainDiv.innerHTML = html;
-        if (param && param.i18n){
+        if (param && param.i18n) {
             let i18n = I18n.use(param.i18n);
             let loaded = await i18n.loadMessageBuldle();
-           app.translateLocale(mainDiv,i18n)
+            app.translateLocale(mainDiv, i18n)
         }
 
 
-        app.setupController(config, param);       
+        app.setupController(config, param);
     }
-    app.translateLocale = function(div,i18n){
+    app.translateLocale = function (div, i18n) {
         let regex = /^\s*$/; //check if this is a blank line
-        let n, textNodeArray=[], walk=document.createTreeWalker(div,NodeFilter.SHOW_TEXT,null,false);
-        while(n=walk.nextNode()) {
-            if (!n.nodeValue.match(regex)){               
-               // console.log(n.nodeValue);
-               textNodeArray.push(n);
-                }
+        let n, textNodeArray = [],
+            walk = document.createTreeWalker(div, NodeFilter.SHOW_TEXT, null, false);
+        while (n = walk.nextNode()) {
+            if (!n.nodeValue.match(regex)) {
+                // console.log(n.nodeValue);
+                textNodeArray.push(n);
+            }
         }
-        for (let node of textNodeArray){
-            if (node.nodeValue){
-                let searchKey = node.nodeValue.trim();  
+        for (let node of textNodeArray) {
+            if (node.nodeValue) {
+                let searchKey = node.nodeValue.trim();
                 //let translatFunc = (val) => i18n.translate2 `${val}`;
                 //let translated = translatFunc(searchKey);
                 let translated = i18n.translateString(searchKey);
-                  
-                 if (translated){
-                  node.nodeValue =node.nodeValue.replace(searchKey,translated);
-                  } 
-                 // console.log(node.nodeValue);
+
+                if (translated) {
+                    node.nodeValue = node.nodeValue.replace(searchKey, translated);
+                }
+                // console.log(node.nodeValue);
             }
-         
+
         }
-        
+
         return textNodeArray;
     }
     /**

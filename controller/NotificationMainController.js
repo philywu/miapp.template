@@ -1,10 +1,6 @@
 import GLOBAL from '../scripts/constants.js';
 import {BaseController} from "./BaseController.js";
-import {
-    RemoteUtil
-} from "../util/util.js";
 
-const NOTIFICATION_SENDER1 = "hitools"
 class NotificationMainController extends BaseController {
     constructor(args) {
         super(args);
