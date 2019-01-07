@@ -31,16 +31,13 @@ import {
      */
     app.init = function (pageName) {
 
-        // app.page.load(pageName).then(pageConfig => {
-        //     if (pageConfig) {
-        //         app.render(pageConfig);
-        //        // app.render(pageConfig,{"i18n":{locale: 'fr-CA', defaultCurrency: 'CAD', messageBundleName: "messageBundle_fr"}});
-        //     }
-        // });
-        const pageConfig = app.page.load(pageName);
-        if (pageConfig) {
-            app.render(pageConfig);
-        }
+        app.page.load(pageName).then(pageConfig => {
+            if (pageConfig) {
+                app.render(pageConfig);
+               // app.render(pageConfig,{"i18n":{locale: 'fr-CA', defaultCurrency: 'CAD', messageBundleName: "messageBundle_fr"}});
+            }
+        });
+      
     }
 
     /**
@@ -50,10 +47,13 @@ import {
     app.route = function (pageName, param) {
 
         app.page.historyPush(app.page.currentPageConfig);
-        let pageConfig = app.page.getPageConfig(pageName);
-        app.render(pageConfig, param);
-
-
+        app.page.load(pageName).then(pageConfig => {
+            if (pageConfig) {
+                app.render(pageConfig,param);
+               // app.render(pageConfig,{"i18n":{locale: 'fr-CA', defaultCurrency: 'CAD', messageBundleName: "messageBundle_fr"}});
+            }
+        });
+ 
     }
     /**
      * rerender the same page

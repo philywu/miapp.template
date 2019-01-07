@@ -1,5 +1,5 @@
 import CONFIG from "../config/config.js"
-
+import {ControllerFactory} from "../controller/ControllerFactory.js";
 //var CONFIG = "../config/config.js";
 var _FRAGMENT_FILE_EXT = ".fragment.html";
 var _PRINT_FILE_EXT = ".print.html";
@@ -25,13 +25,13 @@ class Page {
      * set controllerInstance 
      * @param {string} pageName 
      */
-    getPageConfig(pageName) {
+    async getPageConfig(pageName) {
        
           
             let pageConfig = CONFIG.pages[pageName];
             if (pageConfig){
                 //set controler 
-                pageConfig.controllerInstance = new pageConfig.controller;
+                pageConfig.controllerInstance = await ControllerFactory.getInstance(pageConfig.controller);
                 //set view name as same as key name
                 pageConfig.viewName = pageName ; 
                 this.currentPageConfig = pageConfig ; 
@@ -45,11 +45,12 @@ class Page {
     getHomePageName() {
        
             const pages = CONFIG.pages;
-            let homePage = Object.values(pages).find(el => {                
-                return (el.header.isHome)
-                });
+            let homePage = Object.keys(pages).find(key => {                          
+                const obj = pages[key];                
+                return (obj.header.isHome)
+            });
                     
-            return homePage.name;
+            return homePage;
         
     }
     
@@ -74,12 +75,12 @@ class Page {
      * load page 
      * @param {string} pageName 
      */
-     load(pageName) {             
+     async load(pageName) {             
        
         if (!pageName) {
            pageName = this.getHomePageName();
         } 
-        return this.getPageConfig(pageName);
+        return await this.getPageConfig(pageName);
     }
     /**
      * get view file content
