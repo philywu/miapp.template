@@ -1,11 +1,11 @@
 import {
     Page
-} from "./page.js";
-import GLOBAL from "./constants.js";
+} from "./page.mjs";
+import GLOBAL from "./constants.mjs";
 
 import {
     I18n
-} from "./i18n.js"; {
+} from "./i18n.mjs"; {
     /*
     app: global vairable of app page
     */

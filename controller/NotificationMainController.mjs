@@ -1,5 +1,5 @@
-import GLOBAL from '../scripts/constants.js';
-import {BaseController} from "./BaseController.js";
+import GLOBAL from '../scripts/constants.mjs';
+import {BaseController} from "./BaseController.mjs";
 
 class NotificationMainController extends BaseController {
     constructor(args) {
