@@ -1,4 +1,4 @@
-import GLOBAL from '../scripts/constants.mjs';
+import GLOBAL from '../scripts/constants.js';
 
 class Util {
     /**

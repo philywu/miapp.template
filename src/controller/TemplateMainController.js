@@ -1,5 +1,5 @@
-import GLOBAL from '../scripts/constants.mjs';
-import {BaseController} from "./BaseController.mjs";
+import GLOBAL from '../scripts/constants.js';
+import {BaseController} from "./BaseController.js";
 
 class TemplateMainController extends BaseController {
     constructor(args) {

@@ -1,4 +1,4 @@
-import GLOBAL from '../scripts/constants.mjs';
+import GLOBAL from '../scripts/constants.js';
 
 /**
  * controllerInstances: the collection of instance of controller class.
@@ -16,7 +16,7 @@ class ControllerFactory {
      */
     static async getInstance(controllerName) {
         try {
-            const module = await import(`./${controllerName}.mjs`);
+            const module = await import(`./${controllerName}.js`);
             // The module exports a function named `loadPageInto`.
            // module.loadPageInto(main);
            let controllerClass = module[controllerName] ;
