@@ -1,6 +1,7 @@
-import GLOBAL from '../scripts/constants.mjs';
-import {BaseController} from "./BaseController.mjs";
+import GLOBAL from '../scripts/constants.js';
+import {BaseController} from "./BaseController.js";
 
+import icon from "../images/icon.png";
 class TemplateMainController extends BaseController {
     constructor(args) {
         super(args);
@@ -11,6 +12,11 @@ class TemplateMainController extends BaseController {
         console.log("template main");
         super.init(app);
         this.registerEvent();
+        let imgContainer = document.querySelector('#img_container');
+        
+        const img = `<img src="${icon}">`;
+        console.log(img);
+        imgContainer.innerHTML = img;
     }
 
    

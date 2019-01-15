@@ -2,7 +2,7 @@ var instance = null;
 const typeInfoRegex = /^:([a-z])(\((.+)\))?/;
 const _I18N_FILE_PATH = "./i18n/";
 const _I18N_FILE_PREFIX = "messageBundle_";
-const _I18N_FILE_SUFFIX = ".mjson";
+const _I18N_FILE_SUFFIX = ".json";
 const _FETCH_ARGS = {
   mode: 'cors',
   headers: {
