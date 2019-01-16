@@ -1,34 +1,34 @@
  export default {
-    "version":"1.0",
-    "pages":{
-        "template_main":{            
-            "controller":"TemplateMainController",
-            "header":{
-                "title": "Template",
-                "isHome":true,
-                "isBack":false
+    'version':'1.0',
+    'pages':{
+        'template_main':{            
+            'controller':'TemplateMainController',
+            'header':{
+                'title': 'Template',
+                'isHome':true,
+                'isBack':false
                 
             },
-            "main":{             
+            'main':{             
             },
-            "bottom":{
+            'bottom':{
 
             }
         },
-        "notif_main":{            
-            "controller":"NotificationMainController",
-            "header":{
-                "title": "Notification",
-                "isHome":false,
-                "isBack":true
+        'notif_main':{            
+            'controller':'NotificationMainController',
+            'header':{
+                'title': 'Notification',
+                'isHome':false,
+                'isBack':true
                 
             },
-            "main":{             
+            'main':{             
             },
-            "bottom":{
+            'bottom':{
 
             }
         }                      
 
     }
-}
+};

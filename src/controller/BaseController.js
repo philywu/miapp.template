@@ -13,4 +13,4 @@ class BaseController {
         this.app = app;
     }
 }
-export {BaseController}
+export {BaseController};

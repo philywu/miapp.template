@@ -28,7 +28,7 @@ class ControllerFactory {
            }
           } catch (error) {
             //main.textContent = error.message;
-            console.error(error);
+            //console.error(error);
           }
         //return new name ;
     }
@@ -37,4 +37,4 @@ class ControllerFactory {
 
 export {
     ControllerFactory,
-}
+};

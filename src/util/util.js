@@ -7,9 +7,9 @@ class Util {
      * @param {Array[String]} fields to be set   
      * @param {String} defaultValue    
      */
-    static setDefaultValue(sourceJson,fields,defaultValue = "") {
+    static setDefaultValue(sourceJson,fields,defaultValue = '') {
         
-        if (sourceJson && typeof sourceJson == "object" && fields){
+        if (sourceJson && typeof sourceJson == 'object' && fields){
         //if json class exist        
             //   for (key in sourceJson){
             //       if (!sourceJson[key]) {
@@ -24,7 +24,7 @@ class Util {
                 }
                 break; 
              case Array : 
-                for (name of fields){
+                for (let name of fields){
                     if (!sourceJson[name]) {
                         sourceJson[name] = defaultValue;
                     }
@@ -41,7 +41,7 @@ class Util {
      */
     static getFullServerURL(service,param){
         let serverURL = GLOBAL.API_URL;
-        serverURL += "/" + service;
+        serverURL += '/' + service;
         
         return serverURL;
     }
@@ -58,8 +58,8 @@ class Util {
      * convert value to HTML format , add <br> tag if it is a 'enter'
      */
     static toHTMLFormat(value){
-        if (value && (typeof value ==="string")){
-            let retValue = value.replace(/\n/g, "<br>");
+        if (value && (typeof value ==='string')){
+            let retValue = value.replace(/\n/g, '<br>');
             return retValue;
         } else {
             return value;
@@ -73,7 +73,7 @@ class Util {
     static urlB64ToUint8Array(base64String) {
         const padding = '='.repeat((4 - base64String.length % 4) % 4);
         const base64 = (base64String + padding)
-          .replace(/\-/g, '+')
+          .replace(/-/g, '+')
           .replace(/_/g, '/');
       
         const rawData = window.atob(base64);
@@ -112,7 +112,7 @@ class RemoteUtil {
     static async sendJsonToAPIServer(serviceName,postBody,sendMethod,header) {
         const url = Util.getFullServerURL(serviceName);
         if (!sendMethod){
-            sendMethod="POST";
+            sendMethod='POST';
         }
         if (!header){
             header = {
@@ -127,11 +127,11 @@ class RemoteUtil {
                  body:JSON.stringify(postBody)
                 //body:postBody
             });
-            return await rawResponse.json()
+            return await rawResponse.json();
         } catch(err) {
             return null; 
         }
     }
  
 }
-export {Util,RemoteUtil}
+export {Util,RemoteUtil};

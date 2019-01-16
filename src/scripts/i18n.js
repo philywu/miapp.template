@@ -1,14 +1,14 @@
 var instance = null;
 const typeInfoRegex = /^:([a-z])(\((.+)\))?/;
-const _I18N_FILE_PATH = "./i18n/";
-const _I18N_FILE_PREFIX = "messageBundle_";
-const _I18N_FILE_SUFFIX = ".json";
+const _I18N_FILE_PATH = './i18n/';
+const _I18N_FILE_PREFIX = 'messageBundle_';
+const _I18N_FILE_SUFFIX = '.json';
 const _FETCH_ARGS = {
   mode: 'cors',
   headers: {
     'Access-Control-Allow-Origin': '*'
   }
-}
+};
 class I18n {
   constructor() {
 
@@ -48,7 +48,7 @@ class I18n {
   }
 
   translate(strings, ...values) {
-    console.log(strings, values)
+    //console.log(strings, values);
     let translationKey = this._buildKey(strings);
     let translationString = this.messageBundle[translationKey];
 
@@ -86,8 +86,8 @@ class I18n {
   generateKey(string, map) {
 
     map.forEach((item,key,m) => {
-      key = "\\"+key;
-      let search =new RegExp(key, "g");
+      key = '\\'+key;
+      let search =new RegExp(key, 'g');
       string = string.replace(search,`{${item.index}}`);
     });
     return string;
@@ -98,18 +98,18 @@ class I18n {
     
     map.forEach((item,key,m) => {
       
-      let search =new RegExp(`\\{${item.index}\\}`, "g");
+      let search =new RegExp(`\\{${item.index}\\}`, 'g');
       result = result.replace(search,`${key}`);
     });
     return result;
   }
   buildTemplateFromString(string) {
 
-    const SEP = /\${.+?}/g
+    const SEP = /\${.+?}/g;
     if (string) {
       let arrWords = string.split(SEP);
       //variables array like [${name},${value}]...
-      let arrVars = string.match(SEP)
+      let arrVars = string.match(SEP);
 
       if (arrVars) {
         let cnt = 0;
@@ -118,14 +118,14 @@ class I18n {
           //build index of vars 
           if (!varMap.has(v)) {
             varMap.set(v, {
-              "index": cnt++,
-              "name": v.slice(2, -1)
+              'index': cnt++,
+              'name': v.slice(2, -1)
             });
 
           }
 
         }
-        console.log(varMap);
+       // console.log(varMap);
         return varMap;
       }
 
@@ -168,7 +168,7 @@ class I18n {
           maximumFractionDigits: fractionalDigits
         })
       )
-    }
+    };
     return _localizers[type](value, options);
   }
 
@@ -185,7 +185,7 @@ class I18n {
   _buildMessage(str, ...values) {
     return str.replace(/{(\d)}/g, (_, index) => values[Number(index)]);
   }
-};
+}
 export {
   I18n
-}
+};

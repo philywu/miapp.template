@@ -1,10 +1,10 @@
 let _alertCategory = {
-    "WARNING": "alert-warning",
-    "ERROR": "alert-danger",
-    "SUCCESS": "alert-success",
-    "INFO": "alert-primary",
+    'WARNING': 'alert-warning',
+    'ERROR': 'alert-danger',
+    'SUCCESS': 'alert-success',
+    'INFO': 'alert-primary',
 
-}
+};
 class AlertMessage {
 
     constructor() {
@@ -30,7 +30,7 @@ class AlertMessage {
         this.container = container;
 
         if (!this.isShow()) {
-            container.appendChild(this.html(messageType, content))            
+            container.appendChild(this.html(messageType, content));            
         }
 
     }
@@ -47,10 +47,10 @@ class AlertMessage {
     }
     html(messageType, content) {
         if (content && content.detail == undefined) {
-            content.detail = "";
+            content.detail = '';
         }
         let template = `<div class="alert alert-dismissible fade show text-left" role="alert">
-        ${(content && content.header)?`<strong>${content.header}</strong><br>`:""}  ${content.detail}
+        ${(content && content.header)?`<strong>${content.header}</strong><br>`:''}  ${content.detail}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -63,4 +63,4 @@ class AlertMessage {
 }
 export {
     AlertMessage
-}
+};

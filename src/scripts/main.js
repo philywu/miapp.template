@@ -1,6 +1,6 @@
 
 {
     
-      window.location.replace("app.html");
+      window.location.replace('app.html');
     
 }

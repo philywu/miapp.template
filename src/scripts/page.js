@@ -1,16 +1,16 @@
-import CONFIG from "../config/config.js"
-import {ControllerFactory} from "../controller/ControllerFactory.js";
+import CONFIG from '../config/config.js';
+import {ControllerFactory} from '../controller/ControllerFactory.js';
 //var CONFIG = "../config/config.js";
-var _FRAGMENT_FILE_EXT = ".fragment.html";
-var _PRINT_FILE_EXT = ".print.html";
-var _VIEW_FILE_PATH = "../view/";
+var _FRAGMENT_FILE_EXT = '.fragment.html';
+var _PRINT_FILE_EXT = '.print.html';
+var _VIEW_FILE_PATH = '../view/';
 
 const _FETCH_ARGS = {
     mode: 'cors',
     headers: {
       'Access-Control-Allow-Origin':'*'
     }
-  }
+  };
 /**
  * page control class
  */
@@ -47,7 +47,7 @@ class Page {
             const pages = CONFIG.pages;
             let homePage = Object.keys(pages).find(key => {                          
                 const obj = pages[key];                
-                return (obj.header.isHome)
+                return (obj.header.isHome);
             });
                     
             return homePage;
@@ -110,4 +110,4 @@ class Page {
    
 }
 
-export {Page}
+export {Page};
